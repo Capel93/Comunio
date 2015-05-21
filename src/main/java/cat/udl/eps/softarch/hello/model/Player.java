@@ -2,16 +2,14 @@ package cat.udl.eps.softarch.hello.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * Created by joanmarc on 20/05/15.
  */
 @Entity
+@Table
 public class Player implements Serializable{
     @Id
     @NotBlank(message = "Nick cannot be blank")

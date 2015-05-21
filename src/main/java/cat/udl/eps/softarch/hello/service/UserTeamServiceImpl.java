@@ -3,22 +3,23 @@ package cat.udl.eps.softarch.hello.service;
 import cat.udl.eps.softarch.hello.model.Player;
 import cat.udl.eps.softarch.hello.model.TeamSquad;
 import cat.udl.eps.softarch.hello.model.User;
-import cat.udl.eps.softarch.hello.repository.PlayerRepository;
 import cat.udl.eps.softarch.hello.repository.TeamSquadRepository;
 import cat.udl.eps.softarch.hello.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by joanmarc on 20/05/15.
  */
+@Service
 public class UserTeamServiceImpl implements UserTeamService{
 
     final Logger logger = LoggerFactory.getLogger(UserTeamServiceImpl.class);
 
-    @Autowired
-    PlayerRepository playerRepository;
+
 
     @Autowired
     UserRepository userRepository;
@@ -26,23 +27,48 @@ public class UserTeamServiceImpl implements UserTeamService{
     @Autowired
     TeamSquadRepository teamSquadRepository;
 
+    @Transactional
     @Override
-    public TeamSquad getUserTeam(String username) {
+    public TeamSquad getUserTeam(String name) {
 
-        //TeamSquad teamSquad = teamSquadRepository.findTeamSquadByUserName(username);
-        return null;
+        TeamSquad teamSquad = teamSquadRepository.findTeamSquadByName(name);
+        return teamSquad;
     }
 
+    @Transactional
     @Override
-    public Player addPlayerToTeamSquad(String username,Player player) {
-        TeamSquad teamSquad = teamSquadRepository.findTeamSquadByTeamSquadName(player.getTeamSquad());
-        teamSquad.addPlayer(player);
-        return null;
+    public TeamSquad getUserTeamById(Long id) {
+
+        TeamSquad teamSquad = teamSquadRepository.findTeamSquadById(id);
+        return teamSquad;
     }
 
+    @Transactional
     @Override
-    public void removePlayerFromTeamSquad(String username,String playerName) {
-        //TeamSquad teamSquad = teamSquadRepository.findTeamSquadByUserName(username);
-        //teamSquad.removePlayer(playerName);
+    public TeamSquad addTeamSquadToUser(TeamSquad teamSquad) {
+        User user = userRepository.findOne(teamSquad.getManager().getUsername());
+        if (user == null) {
+            logger.info("IIIIIIIIIIIFFFFFFFFFF");
+            user = teamSquad.getManager();
+        }
+        logger.info("AQUIIIII");
+        teamSquadRepository.save(teamSquad);
+        logger.info("teamsquad SAVEED");
+        user.setTeamSquad(teamSquad);
+        userRepository.save(user);
+        logger.info("User SAVEED");
+        return teamSquad;
     }
+
+    @Transactional
+    @Override
+    public TeamSquad updateTeamSquad(TeamSquad teamSquad, Long teamSquadId) {
+        TeamSquad oldTeamSquad = teamSquadRepository.findTeamSquadById(teamSquadId);
+        oldTeamSquad.setName(teamSquad.getName());
+        oldTeamSquad.setSuplentPlayers(teamSquad.getSuplentPlayers());
+        oldTeamSquad.setTitularPlayers(teamSquad.getTitularPlayers());
+
+        return teamSquadRepository.save(oldTeamSquad);
+    }
+
 }

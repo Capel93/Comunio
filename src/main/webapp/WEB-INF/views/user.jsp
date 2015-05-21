@@ -22,5 +22,7 @@
     </c:if>
 </c:if>
 
+<p><a href="/api/teamSquads/teamSquadForm/${user.getUsername()}">AddTeamSquad</a></p>
+
 </body>
 </html>

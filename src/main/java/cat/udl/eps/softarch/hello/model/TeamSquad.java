@@ -10,8 +10,13 @@ import java.util.List;
  * Created by joanmarc on 20/05/15.
  */
 @Entity
+@Table
 public class TeamSquad {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotBlank(message = "Nick cannot be blank")
+    private Long id;
+
     @NotBlank(message = "Nick cannot be blank")
     private String name;
 
@@ -25,11 +30,25 @@ public class TeamSquad {
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Player> suplentPlayers = new ArrayList<>();
 
+
+    public TeamSquad() {
+        this.titularPlayers = new ArrayList<>();
+        this.suplentPlayers = new ArrayList<>();
+    }
+
     public TeamSquad(String name, User manager, List<Player> titularPlayers, List<Player> suplentPlayers) {
         this.name = name;
         this.manager = manager;
         this.titularPlayers = titularPlayers;
         this.suplentPlayers = suplentPlayers;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

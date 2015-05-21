@@ -2,10 +2,7 @@ package cat.udl.eps.softarch.hello.model;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
  * Created by joanmarc on 20/05/15.
  */
 @Entity
+@Table
 public class Market implements Serializable{
 
     @Id

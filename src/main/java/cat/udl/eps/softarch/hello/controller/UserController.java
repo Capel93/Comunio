@@ -1,15 +1,21 @@
 package cat.udl.eps.softarch.hello.controller;
 
+import cat.udl.eps.softarch.hello.model.TeamSquad;
 import cat.udl.eps.softarch.hello.model.User;
 import cat.udl.eps.softarch.hello.repository.UserRepository;
 import cat.udl.eps.softarch.hello.service.UserGreetingsService;
+import cat.udl.eps.softarch.hello.service.UserService;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 /**
  * Created by http://rhizomik.net/~roberto/
@@ -21,7 +27,11 @@ public class UserController {
     final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired UserRepository       userRepository;
+
     @Autowired UserGreetingsService userGreetingsService;
+
+    @Autowired
+    UserService userService;
 
     // LIST
     @RequestMapping(method = RequestMethod.GET)
@@ -40,5 +50,14 @@ public class UserController {
         logger.info("Retrieving user {}", username);
         Preconditions.checkNotNull(userRepository.findOne(username), "User with id %s not found", username);
         return userGreetingsService.getUserAndGreetings(username);
+    }
+
+    // CREATE
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public User create(@Valid @RequestBody User user, HttpServletResponse response) {
+        User u = userService.addUser(user);
+        return u;
     }
 }

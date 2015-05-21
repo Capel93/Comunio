@@ -11,7 +11,11 @@ public interface UserTeamService {
 
     TeamSquad getUserTeam(String username);
 
-    Player addPlayerToTeamSquad(String username,Player player);
+    TeamSquad getUserTeamById(Long id);
 
-    void removePlayerFromTeamSquad(String username,String playerName);
+    TeamSquad addTeamSquadToUser(TeamSquad teamSquad);
+
+    TeamSquad updateTeamSquad(TeamSquad teamSquad, Long teamSquadId);
+
+
 }

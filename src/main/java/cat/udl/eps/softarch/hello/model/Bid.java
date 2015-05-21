@@ -7,6 +7,7 @@ import java.io.Serializable;
  * Created by joanmarc on 20/05/15.
  */
 @Entity
+@Table
 public class Bid implements Serializable{
     @Id
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)

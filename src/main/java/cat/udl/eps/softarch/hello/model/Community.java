@@ -25,6 +25,10 @@ public class Community implements Serializable{
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private User admin;
 
+    public Community() {
+        this.users = new ArrayList<>();
+    }
+
     public Community(List<User> users, String name, User admin) {
         this.users = users;
         this.name = name;
@@ -53,5 +57,18 @@ public class Community implements Serializable{
 
     public void setAdmin(User admin) {
         this.admin = admin;
+    }
+
+    public void addUser(User user){
+        this.users.add(user);
+    }
+
+    @Override
+    public String toString() {
+        return "Community{" +
+                "name='" + name + '\'' +
+                ", users=" + users +
+                ", admin=" + admin +
+                '}';
     }
 }

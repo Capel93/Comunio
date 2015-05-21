@@ -12,7 +12,7 @@ import java.util.List;
  * Created by http://rhizomik.net/~roberto/
  */
 @Entity
-@Table(name = "GreetingsUser") //Avoid collision with system table User in Postgres
+@Table(name = "ComunioUser") //Avoid collision with system table User in Postgres
 public class User {
     @Id
     @NotBlank(message = "Username cannot be blank")
@@ -24,11 +24,9 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Greeting> greetings = new ArrayList<>();
 
-    @NotBlank(message = "teamSquad cannot be blank")
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private TeamSquad teamSquad;
 
-    @NotBlank(message = "community cannot be blank")
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private Community community;
 

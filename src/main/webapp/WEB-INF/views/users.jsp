@@ -11,5 +11,6 @@
         </c:forEach>
     </c:if>
     </ul>
+    <p><a href="/api/users/userForm">NewUser</a></p>
 </body>
 </html>
