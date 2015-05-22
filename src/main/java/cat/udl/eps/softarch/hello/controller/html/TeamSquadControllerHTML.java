@@ -69,16 +69,7 @@ public class TeamSquadControllerHTML {
     @RequestMapping(value = "/teamSquadForm/{username}", method = {RequestMethod.GET,RequestMethod.POST}, produces = "text/html")
     public ModelAndView createForm(@PathVariable("username") String username) {
 
-        TeamSquad emptyTeamSquad = new TeamSquad();
-        List<Player> titularPlayers = new ArrayList<>();
-        titularPlayers.add(new Player("Joan","DC","JoanTeam",new Team("FCB")));
-        titularPlayers.add(new Player("Victor","DF","JoanTeam",new Team("AND")));
-        emptyTeamSquad.setTitularPlayers(titularPlayers);
-        List<Player> suplentPlayers = new ArrayList<>();
-        suplentPlayers.add(new Player("Guille","LD","JoanTeam",new Team("UEL")));
-        suplentPlayers.add(new Player("Sergi","LI","JoanTeam",new Team("UEL")));
-        emptyTeamSquad.setSuplentPlayers(suplentPlayers);
-        emptyTeamSquad.setManager(userRepository.findOne(username));
+        TeamSquad emptyTeamSquad = setPlayerList();
 
         return new ModelAndView("teamSquadForm", "teamSquad", emptyTeamSquad);
     }
@@ -94,9 +85,27 @@ public class TeamSquadControllerHTML {
         return "redirect:"+teamSquadController.update(id,teamSquad);
     }
     // Update form
-    @RequestMapping(value = "/{id}/teamSquadForm", method = RequestMethod.GET, produces = "text/html")
+    /*@RequestMapping(value = "/{id}/teamSquadForm", method = RequestMethod.GET, produces = "text/html")
     public ModelAndView updateForm(@PathVariable("id") Long id) {
         Preconditions.checkNotNull(teamSquadRepository.findOne(id), "teamSquad with id %s not found", id);
         return new ModelAndView("teamSquadForm", "teamSquad", teamSquadRepository.findOne(id));
+    }*/
+    @RequestMapping(value = "/{name}/teamSquadForm", method = RequestMethod.GET, produces = "text/html")
+    public ModelAndView updateForm(@PathVariable("name") String name) {
+        Preconditions.checkNotNull(teamSquadRepository.findTeamSquadByName(name), "teamSquad with id %s not found", name);
+        return new ModelAndView("teamSquadForm", "teamSquad", teamSquadRepository.findTeamSquadByName(name));
+    }
+
+    private TeamSquad setPlayerList(){
+        TeamSquad teamSquad = new TeamSquad();
+        List<Player> titularPlayers = new ArrayList<>();
+        titularPlayers.add(new Player("Joan","DC","JoanTeam",new Team("FCB")));
+        titularPlayers.add(new Player("Victor","DF","JoanTeam",new Team("AND")));
+        teamSquad.setTitularPlayers(titularPlayers);
+        List<Player> suplentPlayers = new ArrayList<>();
+        suplentPlayers.add(new Player("Guille","LD","JoanTeam",new Team("UEL")));
+        suplentPlayers.add(new Player("Sergi","LI","JoanTeam",new Team("UEL")));
+        teamSquad.setSuplentPlayers(suplentPlayers);
+        return teamSquad;
     }
 }

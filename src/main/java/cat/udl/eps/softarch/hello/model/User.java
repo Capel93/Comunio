@@ -24,11 +24,11 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Greeting> greetings = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
-    private TeamSquad teamSquad;
+    //@OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
+    private String teamSquad;
 
-    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
-    private Community community;
+    //@OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
+    private String community;
 
 
     @URL
@@ -68,23 +68,23 @@ public class User {
         this.username = username;
     }
 
-    public Community getCommunity() {
+    public String getCommunity() {
         return community;
     }
 
-    public void setCommunity(Community community) {
+    public void setCommunity(String community) {
         this.community = community;
     }
 
-    public TeamSquad getTeamSquad() {
+    public String getTeamSquad() {
         return teamSquad;
     }
 
-    public void setTeamSquad(TeamSquad teamSquad) {
+    public void setTeamSquad(String teamSquad) {
         this.teamSquad = teamSquad;
     }
 
-    public List<Player> getAllPLayers(){
+    /*public List<Player> getAllPLayers(){
         return this.teamSquad.getAllPLayers();
     }
 
@@ -94,5 +94,5 @@ public class User {
 
     public void sellPlayer(String nick){
         this.teamSquad.removePlayer(nick);
-    }
+    }*/
 }

@@ -46,17 +46,10 @@ public class UserTeamServiceImpl implements UserTeamService{
     @Transactional
     @Override
     public TeamSquad addTeamSquadToUser(TeamSquad teamSquad) {
-        User user = userRepository.findOne(teamSquad.getManager().getUsername());
-        if (user == null) {
-            logger.info("IIIIIIIIIIIFFFFFFFFFF");
-            user = teamSquad.getManager();
-        }
-        logger.info("AQUIIIII");
+        User user = userRepository.findOne(teamSquad.getManager());
         teamSquadRepository.save(teamSquad);
-        logger.info("teamsquad SAVEED");
-        user.setTeamSquad(teamSquad);
+        user.setTeamSquad(teamSquad.getName());
         userRepository.save(user);
-        logger.info("User SAVEED");
         return teamSquad;
     }
 

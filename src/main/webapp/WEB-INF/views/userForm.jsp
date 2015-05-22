@@ -30,6 +30,14 @@
       <td><form:label path="email">E-Mail</form:label></td>
       <td><form:input path="email"/> <i><form:errors path="email"></form:errors></i></td>
     </tr>
+    <tr>
+      <td><form:label path="community">Community</form:label></td>
+      <td><form:input path="community"/> <i><form:errors path="community"></form:errors></i></td>
+    </tr>
+    <tr>
+      <td><form:label path="teamSquad">Team Squad</form:label></td>
+      <td><form:input path="teamSquad"/> <i><form:errors path="teamSquad"></form:errors></i></td>
+    </tr>
 
     <tr>
       <td><input type="submit" value="Submit" /></td>

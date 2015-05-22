@@ -21,7 +21,7 @@ public class Community implements Serializable{
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<User> users = new ArrayList<>();
 
-    @NotBlank(message = "Role cannot be blank")
+    //@NotBlank(message = "Role cannot be blank")
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private User admin;
 

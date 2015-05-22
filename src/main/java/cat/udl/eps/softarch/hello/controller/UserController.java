@@ -56,7 +56,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public User create(@Valid @RequestBody User user, HttpServletResponse response) {
+    public User create(@RequestBody User user, HttpServletResponse response) {
         User u = userService.addUser(user);
         return u;
     }

@@ -55,26 +55,8 @@ public class UserControllerHTML {
     // CREATE
     @RequestMapping(method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded", produces="text/html")
     public String createHTML(@ModelAttribute("user") User user, BindingResult binding, HttpServletResponse response) {
-        /*if (binding.hasErrors()) {
 
-            return "teamSquadForm";
-        }*/
-        /*logger.info("Nothing save");
-
-        TeamSquad teamSquad = new TeamSquad();
-        teamSquad.setManager(user);
-        teamSquad.setName(user.getTeamSquad().getName());
-
-        user.setTeamSquad(teamSquadRepository.save(teamSquad));
-        logger.info("SAVE Team");
-        Community community = new Community();
-        community.addUser(user);
-        community.setAdmin(user);
-        community.setName(user.getCommunity().getName());
-
-        user.setCommunity(communityRepository.save(community));
-        logger.info("SAVE ALL");*/
-
+        logger.info("User username:{}, email:{}, community:{}, team:{} ",user.getUsername(),user.getEmail(),user.getCommunity(),user.getTeamSquad());
         return "redirect:users/"+userController.create(user, response).getUsername();
     }
 
@@ -83,14 +65,7 @@ public class UserControllerHTML {
     public ModelAndView createForm() {
 
         User emptyUser = new User();
-        /*TeamSquad teamSquad = new TeamSquad();
-        teamSquad.setManager(emptyUser);
-        Community community = new Community();
-        community.addUser(emptyUser);
-        emptyUser.setTeamSquad(teamSquad);
-        emptyUser.setCommunity(community);*/
 
-        logger.info("SEND FORM");
         return new ModelAndView("userForm", "user", emptyUser);
     }
 }

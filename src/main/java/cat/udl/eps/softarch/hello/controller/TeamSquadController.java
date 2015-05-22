@@ -57,7 +57,7 @@ public class TeamSquadController {
     @ResponseBody
     public TeamSquad create(@Valid @RequestBody TeamSquad teamSquad, HttpServletResponse response) {
         logger.info("Creating teamSquad with name'{}'", teamSquad.getName());
-        teamSquad.setManager(new User("vic","vv@vv.es"));
+        //teamSquad.setManager(new User("vic","vv@vv.es"));
         TeamSquad newTeamSquad = userTeamService.addTeamSquadToUser(teamSquad);
         logger.info("created teamSquad with name'{}'", teamSquad.getId());
         response.setHeader("Location", "teamSquad/" + newTeamSquad.getId());

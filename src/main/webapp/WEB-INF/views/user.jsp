@@ -7,22 +7,19 @@
 <p><a href="/api/users">Users</a></p>
 
 <c:if test="${not empty user}">
-    <h2>User ${user.getUsername()}</h2>
-    <c:if test="${not empty user.getEmail()}">
+    <h2>User ${user.username}</h2>
+    <c:if test="${not empty user.email}">
         <p>E-mail: ${user.getEmail()}</p>
     </c:if>
-    <c:if test="${not empty user.getImageUrl()}">
-        <img src="${user.getImageUrl()}"/>
+    <c:if test="${not empty user.getCommunity()}">
+        <p Community:${user.getCommunity()}/>
     </c:if>
-    <c:if test="${not empty user.getGreetings()}">
-        <h3>User Greetings</h3>
-        <c:forEach var="greeting" items="${user.getGreetings()}">
-            <li><a href="/api/greetings/${greeting.getId()}">${greeting.getId()}</a>: ${fn:escapeXml(greeting.getContent())}</li>
-        </c:forEach>
+    <c:if test="${not empty user.getTeamSquad()}">
+        <p TeamSquad:${user.getTeamSquad()}/>
     </c:if>
 </c:if>
 
-<p><a href="/api/teamSquads/teamSquadForm/${user.getUsername()}">AddTeamSquad</a></p>
+<p><a href="/api/teamSquads/${user.getTeamSquad()}/teamSquadForm/">Update Team Squad</a></p>
 
 </body>
 </html>

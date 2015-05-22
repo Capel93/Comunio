@@ -14,15 +14,15 @@ import java.util.List;
 public class TeamSquad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotBlank(message = "Nick cannot be blank")
+    @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "Nick cannot be blank")
+    //@NotBlank(message = "Nick cannot be blank")
     private String name;
 
-    @NotBlank(message = "Nick cannot be blank")
-    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
-    private User manager;
+    //@NotBlank(message = "Nick cannot be blank")
+    //@OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
+    private String manager;
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Player> titularPlayers = new ArrayList<>();
@@ -36,7 +36,7 @@ public class TeamSquad {
         this.suplentPlayers = new ArrayList<>();
     }
 
-    public TeamSquad(String name, User manager, List<Player> titularPlayers, List<Player> suplentPlayers) {
+    public TeamSquad(String name, String manager, List<Player> titularPlayers, List<Player> suplentPlayers) {
         this.name = name;
         this.manager = manager;
         this.titularPlayers = titularPlayers;
@@ -59,11 +59,11 @@ public class TeamSquad {
         this.name = name;
     }
 
-    public User getManager() {
+    public String getManager() {
         return manager;
     }
 
-    public void setManager(User manager) {
+    public void setManager(String manager) {
         this.manager = manager;
     }
 
