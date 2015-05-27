@@ -1,11 +1,7 @@
 package cat.udl.eps.softarch.hello.controller;
 
-import cat.udl.eps.softarch.hello.model.Greeting;
 import cat.udl.eps.softarch.hello.model.TeamSquad;
-import cat.udl.eps.softarch.hello.model.User;
 import cat.udl.eps.softarch.hello.repository.TeamSquadRepository;
-import cat.udl.eps.softarch.hello.repository.UserRepository;
-import cat.udl.eps.softarch.hello.service.UserGreetingsService;
 import cat.udl.eps.softarch.hello.service.UserTeamService;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;

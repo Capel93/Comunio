@@ -2,7 +2,6 @@ package cat.udl.eps.softarch.hello.repository;
 
 
 
-import cat.udl.eps.softarch.hello.model.Greeting;
 import cat.udl.eps.softarch.hello.model.TeamSquad;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;

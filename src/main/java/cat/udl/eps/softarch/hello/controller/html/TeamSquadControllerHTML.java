@@ -2,7 +2,6 @@ package cat.udl.eps.softarch.hello.controller.html;
 
 
 import cat.udl.eps.softarch.hello.controller.TeamSquadController;
-import cat.udl.eps.softarch.hello.model.Greeting;
 import cat.udl.eps.softarch.hello.model.Player;
 import cat.udl.eps.softarch.hello.model.Team;
 import cat.udl.eps.softarch.hello.model.TeamSquad;
@@ -20,9 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**

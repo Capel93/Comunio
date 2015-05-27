@@ -6,7 +6,6 @@ import cat.udl.eps.softarch.hello.model.*;
 import cat.udl.eps.softarch.hello.repository.CommunityRepository;
 import cat.udl.eps.softarch.hello.repository.TeamSquadRepository;
 import cat.udl.eps.softarch.hello.repository.UserRepository;
-import cat.udl.eps.softarch.hello.service.UserGreetingsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by http://rhizomik.net/~roberto/
@@ -30,7 +26,7 @@ public class UserControllerHTML {
     final Logger logger = LoggerFactory.getLogger(UserControllerHTML.class);
 
     @Autowired UserRepository       userRepository;
-    @Autowired UserGreetingsService userGreetingsService;
+
     @Autowired UserController       userController;
     @Autowired
     TeamSquadRepository teamSquadRepository;
