@@ -75,6 +75,7 @@ class GlobalDefaultExceptionHandler {
         public ErrorInfo(String url, Exception e) {
             this.url = url;
             this.message = e.getMessage();
+
         }
 
         public String getUrl() { return url; }
