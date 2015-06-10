@@ -22,7 +22,7 @@
       </c:forEach>
     </c:if>
   </ul>
-  <p><a href="/api/teamSquads/teamSquadForm">Add</a></p>
+  <p><a href="/api/teamSquads/teamSquadForm/Test">Add</a></p>
 
 </body>
 </html>

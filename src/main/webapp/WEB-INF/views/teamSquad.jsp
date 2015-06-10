@@ -17,8 +17,8 @@
 <body>
     <p><a href="/api/teamSquads">TeamSquad</a></p>
     <c:if test="${not empty teamSquad}">
-        <h2>Greeting number ${teamSquad.getName()}</h2>
-        <p>Message: ${fn:escapeXml(teamSquad.getContent())}
+        <h2>TeamSquad name ${teamSquad.getName()}</h2>
+        <p>Message:
             (<a href="/api/teamSquads/${teamSquad.getId()}/">edit</a>)</p>
         <p>By ${teamSquad.getManager().getUserName()} </p>
 

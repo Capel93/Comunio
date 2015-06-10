@@ -25,9 +25,11 @@ import javax.servlet.http.HttpServletResponse;
 public class UserControllerHTML {
     final Logger logger = LoggerFactory.getLogger(UserControllerHTML.class);
 
-    @Autowired UserRepository       userRepository;
+    @Autowired
+    UserRepository       userRepository;
 
-    @Autowired UserController       userController;
+    @Autowired
+    UserController       userController;
     @Autowired
     TeamSquadRepository teamSquadRepository;
     @Autowired
@@ -47,6 +49,20 @@ public class UserControllerHTML {
     public ModelAndView retrieveHTML(@PathVariable("username") String username) {
         return new ModelAndView("user", "user", userController.retrieve(username));
     }
+
+    // RETRIEVE
+    /*@RequestMapping(value = "/{username}", method = RequestMethod.GET, produces = "text/html")
+    public ModelAndView retrieveHTMLInit(@PathVariable("username") String username) {
+        return new ModelAndView("user", "user", userController.retrieve(username));
+    }
+    // Create form
+    @RequestMapping(value = "/", method = {RequestMethod.GET,RequestMethod.POST}, produces = "text/html")
+    public ModelAndView initaplication() {
+
+        User emptyUser = new User();
+
+        return new ModelAndView("main", "user", emptyUser);
+    }*/
 
     // CREATE
     @RequestMapping(method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded", produces="text/html")

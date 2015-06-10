@@ -1,6 +1,10 @@
 package cat.udl.eps.softarch.hello.config;
 
 import cat.udl.eps.softarch.hello.filter.SimpleCORSFilter;
+import cat.udl.eps.softarch.hello.model.User;
+import cat.udl.eps.softarch.hello.repository.UserRepository;
+import cat.udl.eps.softarch.hello.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -16,6 +20,9 @@ import java.util.EnumSet;
  */
 public class ApplicationInitializer implements WebApplicationInitializer {
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
@@ -24,6 +31,8 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(rootContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/api/*");
+
+
 
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
         FilterRegistration.Dynamic security = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());

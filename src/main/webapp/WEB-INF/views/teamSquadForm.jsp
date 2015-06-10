@@ -35,6 +35,7 @@
       <tr>
         <td><form:label path="titularPlayers">Titular Players</form:label></td>
       </tr>
+
       <c:forEach items="${teamSquad.titularPlayers}" var="player">
         <tr>
           <td><form:checkbox path="titularPlayers" value="${player}" label="${player.nick}" checked="checked"/></td>

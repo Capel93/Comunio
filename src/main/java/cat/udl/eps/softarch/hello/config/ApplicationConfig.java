@@ -26,9 +26,6 @@ import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-/**
- * Created by http://rhizomik.net/~roberto/
- */
 
 @Configuration
 @EnableWebMvc

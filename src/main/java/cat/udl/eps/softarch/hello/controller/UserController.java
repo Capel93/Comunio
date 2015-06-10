@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,5 +57,13 @@ public class UserController {
     public User create(@RequestBody User user, HttpServletResponse response) {
         User u = userService.addUser(user);
         return u;
+    }
+
+    // RETRIEVE LOGGED USER
+    @RequestMapping("/current")
+    @ResponseBody
+    public User user(@AuthenticationPrincipal User user) {
+        logger.info("Retrieving current logged in user {}", user.getUsername());
+        return userService.getUser(user.getUsername());
     }
 }
