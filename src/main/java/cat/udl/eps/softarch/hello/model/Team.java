@@ -17,6 +17,9 @@ public class Team implements Serializable{
     @NotBlank(message = "name cannot be blank")
     private String name;
 
+    public Team() {
+    }
+
     public Team(String name) {
         this.name = name;
     }

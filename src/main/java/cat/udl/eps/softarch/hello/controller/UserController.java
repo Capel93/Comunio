@@ -3,6 +3,7 @@ package cat.udl.eps.softarch.hello.controller;
 import cat.udl.eps.softarch.hello.model.User;
 import cat.udl.eps.softarch.hello.repository.UserRepository;
 import cat.udl.eps.softarch.hello.service.UserService;
+import cat.udl.eps.softarch.hello.service.XQueryHelper;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+
     // LIST
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
@@ -56,6 +58,8 @@ public class UserController {
     @ResponseBody
     public User create(@RequestBody User user, HttpServletResponse response) {
         User u = userService.addUser(user);
+
+
         return u;
     }
 

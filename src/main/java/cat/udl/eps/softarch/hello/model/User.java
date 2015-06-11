@@ -31,22 +31,39 @@ public class User implements UserDetails {
 
     private String community;
 
+    private int money;
+
+    private int points;
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void addPoints(int p) {
+        this.points = this.points + p;
+    }
 
     @URL
     private String imageUrl;
 
     public User() {
+        this.points = 0;
     }
 
     public User(String username, String email) {
         this.username = username;
         this.email = email;
+        this.points = 0;
+        this.money = 0;
     }
 
-    public User(String username,String password, String email) {
+    public User(String username,String password, String email,String teamSquad) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.teamSquad = teamSquad;
+        this.points = 0;
+        this.money = 0;
     }
 
     @Override
@@ -93,7 +110,17 @@ public class User implements UserDetails {
 
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
+    public int getMoney() {
+        return money;
+    }
 
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
     public void setUsername(String username) {
         this.username = username;

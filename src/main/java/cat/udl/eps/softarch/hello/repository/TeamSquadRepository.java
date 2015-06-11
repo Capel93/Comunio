@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface TeamSquadRepository extends PagingAndSortingRepository<TeamSquad, Long> {
     //TeamSquad findTeamSquadByUserName(@Param("username") String userName);
-
+    //TeamSquad findTeamSquadByManagerName(@Param("manager") String manager);
     TeamSquad findTeamSquadByName(@Param("name") String name);
     TeamSquad findTeamSquadById(@Param("id") Long id);
 

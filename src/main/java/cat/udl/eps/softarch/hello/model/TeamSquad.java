@@ -24,16 +24,19 @@ public class TeamSquad {
     //@OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private String manager;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Player> titularPlayers = new ArrayList<>();
+    private int points;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Player> suplentPlayers = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Player> titularPlayers;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Player> suplentPlayers;
 
 
     public TeamSquad() {
         this.titularPlayers = new ArrayList<>();
         this.suplentPlayers = new ArrayList<>();
+        this.points = 0;
     }
 
     public TeamSquad(String name, String manager, List<Player> titularPlayers, List<Player> suplentPlayers) {
@@ -41,6 +44,23 @@ public class TeamSquad {
         this.manager = manager;
         this.titularPlayers = titularPlayers;
         this.suplentPlayers = suplentPlayers;
+        this.points = 0;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int calcPoints(){
+        int total = 0;
+        for (Player p:this.titularPlayers){
+            total = total + p.getCurrentPoints();
+        }
+        return total;
     }
 
     public Long getId() {
@@ -83,10 +103,16 @@ public class TeamSquad {
         this.suplentPlayers = suplentPlayers;
     }
 
-    public void addPlayer(Player player) {
+    public void addTitularPlayer(Player player) {
+
+        this.titularPlayers.add(player);
+        //player.setTeamSquad(this.name);
+
+    }
+    public void addSuplentPlayer(Player player) {
 
         this.suplentPlayers.add(player);
-        player.setTeamSquad(this.name);
+        //player.setTeamSquad(this.name);
 
     }
 

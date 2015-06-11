@@ -31,15 +31,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        User user = new User("admin","admin","admin@gmail.com");
-        userRepository.save(user);
+        //User user = new User("admin","admin","admin@gmail.com");
+        //userRepository.save(user);
         http.httpBasic().and()
                 .authorizeRequests()
-                .antMatchers("/api/*/form").authenticated()
-                .antMatchers("/api/users/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/api/**").authenticated()
-                .antMatchers(HttpMethod.PUT, "/api/**").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/api/**").authenticated()
+                .antMatchers("/*/form").authenticated()
+                .antMatchers("/users/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/**").authenticated()
                 .anyRequest().permitAll().and()
                 .addFilterAfter(new CSRFCookieFilter(), CsrfFilter.class)
                 .csrf().csrfTokenRepository(csrfTokenRepository());

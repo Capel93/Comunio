@@ -15,21 +15,28 @@ public class Player implements Serializable{
     @NotBlank(message = "Nick cannot be blank")
     private String nick;
 
-    @NotBlank(message = "Role cannot be blank")
     private String role;
 
-    @NotBlank(message = "Team cannot be blank")
-    @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
-    private Team team;
+    private String team;
 
-    @NotBlank(message = "TeamSquad cannot be blank")
     private String teamSquad;
 
-    public Player(String nick, String role, String teamSquad, Team team) {
+    private int totalPoints;
+
+    private int currentPoints;
+
+    public Player() {
+        this.totalPoints = 0;
+        this.currentPoints = 0;
+    }
+
+    public Player(String nick, String role, String teamSquad, String team) {
         this.nick = nick;
         this.role = role;
         this.teamSquad = teamSquad;
         this.team = team;
+        this.totalPoints = 0;
+        this.currentPoints = 0;
     }
 
     public String getNick() {
@@ -48,11 +55,11 @@ public class Player implements Serializable{
         this.role = role;
     }
 
-    public Team getTeam() {
+    public String getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(String team) {
         this.team = team;
     }
 
@@ -62,5 +69,21 @@ public class Player implements Serializable{
 
     public void setTeamSquad(String teamSquad) {
         this.teamSquad = teamSquad;
+    }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
+    public int getCurrentPoints() {
+        return currentPoints;
+    }
+
+    public void setCurrentPoints(int currentPoints) {
+        this.currentPoints = currentPoints;
     }
 }

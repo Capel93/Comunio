@@ -39,12 +39,12 @@ public class TeamSquadController {
     }
 
     // RETRIEVE
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     @ResponseBody
-    public TeamSquad retrieve(@PathVariable("id") Long id) {
-        logger.info("Retrieving TeamSquad {}", id);
-        Preconditions.checkNotNull(teamSquadRepository.findOne(id), "TeamSquad with id %s not found", id);
-        return userTeamService.getUserTeamById(id);
+    public TeamSquad retrieve(@PathVariable("name") String name) {
+        logger.info("Retrieving TeamSquad {}", name);
+        Preconditions.checkNotNull(teamSquadRepository.findTeamSquadByName(name), "TeamSquad with id %s not found", name);
+        return teamSquadRepository.findTeamSquadByName(name);
     }
 
     // CREATE

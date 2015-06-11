@@ -12,17 +12,72 @@
 <html>
 <head>
     <title></title>
+  <link rel="stylesheet" href="../css/application.css">
+
 </head>
 <body>
   <h2>TeamSquad List</h2>
-  <ul>
-    <c:if test="${not empty teamSquads}">
-      <c:forEach var="teamSquad" items="${teamSquads}">
-        <li><a href="/api/teamSquads/${teamSquad.getId()}">${teamSquad.getName()}</a></li>
-      </c:forEach>
-    </c:if>
-  </ul>
-  <p><a href="/api/teamSquads/teamSquadForm/Test">Add</a></p>
+  <div id="main">
+    <div id="header">
+      <div id="banner">
+        <div id="welcome">
+          <h1>${user.username}</h1>
+        </div><!--close welcome-->
+
+      </div><!--close banner-->
+    </div><!--close header-->
+
+    <div id="menubar">
+      <ul id="menu">
+        <li class="current"><a href="mainPage">Home</a></li>
+        <li><a href="users">Ranking</a></li>
+        <li><a href="teamSquads">currentRunking</a></li>
+        <li><a href="teamSquad/${user.username}">teamSquad</a></li>
+        <li><a href="market/${user.username}">Market</a></li>
+      </ul>
+    </div><!--close menubar-->
+
+    <div id="site_content">
+
+      <div id="content">
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3">
+            <table class="table table-striped" style="width:100%; text-align:center;">
+              <thead>
+              <tr>
+                <th style="width:20%;"><h2>ID</h2></th>
+                <th style="width:10%;"><h2>Name</h2></th>
+                <th style="width:20%;"><h2>Manager</h2></th>
+                <th style="width:20%;"><h2>Points</h2></th>
+
+                <th style="width:10%;"></th>
+              </tr>
+              </thead>
+              <c:forEach var="teamSquad" items="${teamSquads}">
+                <tbody>
+                <tr>
+                  <td><a href="/teamSquads/${teamSquad.getId()}">${teamSquad.getId()}</a></td>
+                  <td>${teamSquad.getName()}</td>
+                  <td>${teamSquad.getManager()}</td>
+                  <td>${teamSquad.getPoints()}</td>
+
+                </tr>
+                </tbody>
+              </c:forEach>
+            </table>
+            <br/><br/><br/>
+            <hr/>
+
+          </div>
+        </div>
+      </div><!--close content-->
+    </div><!--close site_content-->
+
+
+
+  </div><!--close main-->
+
+
 
 </body>
 </html>

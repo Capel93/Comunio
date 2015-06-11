@@ -46,9 +46,9 @@ public class TeamSquadControllerHTML {
     }
 
     // RETRIEVE
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "text/html")
-    public ModelAndView retrieveHTML(@PathVariable( "id" ) Long id) {
-        return new ModelAndView("teamSquad", "teamSquad", teamSquadController.retrieve(id));
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = "text/html")
+    public ModelAndView retrieveHTML(@PathVariable( "name" ) String name) {
+        return new ModelAndView("teamSquad", "teamSquad", teamSquadController.retrieve(name));
     }
 
     // CREATE
@@ -63,11 +63,11 @@ public class TeamSquadControllerHTML {
     }
 
     // Create form
-    @RequestMapping(value = "/teamSquadForm/{username}", method = {RequestMethod.GET,RequestMethod.POST}, produces = "text/html")
-    public ModelAndView createForm(@PathVariable("username") String username) {
+    @RequestMapping(value = "/teamSquadForm/{name}", method = {RequestMethod.GET,RequestMethod.POST}, produces = "text/html")
+    public ModelAndView createForm(@PathVariable("name") String name) {
 
-        TeamSquad emptyTeamSquad = setPlayerList();
-
+        //TeamSquad emptyTeamSquad = setPlayerList();
+        TeamSquad emptyTeamSquad=new TeamSquad();
         return new ModelAndView("teamSquadForm", "teamSquad", emptyTeamSquad);
     }
 
@@ -93,16 +93,5 @@ public class TeamSquadControllerHTML {
         return new ModelAndView("teamSquadForm", "teamSquad", teamSquadRepository.findTeamSquadByName(name));
     }
 
-    private TeamSquad setPlayerList(){
-        TeamSquad teamSquad = new TeamSquad();
-        List<Player> titularPlayers = new ArrayList<>();
-        titularPlayers.add(new Player("Joan","DC","JoanTeam",new Team("FCB")));
-        titularPlayers.add(new Player("Victor","DF","JoanTeam",new Team("AND")));
-        teamSquad.setTitularPlayers(titularPlayers);
-        List<Player> suplentPlayers = new ArrayList<>();
-        suplentPlayers.add(new Player("Guille","LD","JoanTeam",new Team("UEL")));
-        suplentPlayers.add(new Player("Sergi","LI","JoanTeam",new Team("UEL")));
-        teamSquad.setSuplentPlayers(suplentPlayers);
-        return teamSquad;
-    }
+
 }

@@ -30,19 +30,19 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(rootContext));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/api/*");
+        dispatcher.addMapping("/");
 
 
 
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
         FilterRegistration.Dynamic security = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-        security.addMappingForUrlPatterns(dispatcherTypes, true, "/api/*");
+        security.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
 
         FilterRegistration.Dynamic cors = servletContext.addFilter("simpleCORSFilter", new SimpleCORSFilter());
-        cors.addMappingForUrlPatterns(dispatcherTypes, true, "/api/*");
+        cors.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
 
         FilterRegistration.Dynamic httpMethods = servletContext.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter());
-        httpMethods.addMappingForUrlPatterns(dispatcherTypes, true, "/api/*");
+        httpMethods.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
 
 
         servletContext.addListener(new ContextLoaderListener(rootContext));

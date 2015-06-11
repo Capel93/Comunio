@@ -9,12 +9,18 @@ import java.io.Serializable;
 @Entity
 @Table
 public class Bid implements Serializable{
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private User user;
-    @Id
+
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private Player player;
+
     private int bid;
 
     public Bid(User user, Player player, int bid) {

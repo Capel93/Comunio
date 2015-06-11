@@ -17,7 +17,6 @@ public class Community implements Serializable{
     @NotBlank(message = "Role cannot be blank")
     private String name;
 
-
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<User> users = new ArrayList<>();
 
@@ -25,14 +24,20 @@ public class Community implements Serializable{
     @OneToOne(fetch = FetchType.EAGER, orphanRemoval = true)
     private User admin;
 
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Player> market = new ArrayList<>();
+
     public Community() {
+
         this.users = new ArrayList<>();
+        this.market = new ArrayList<>();
     }
 
     public Community(List<User> users, String name, User admin) {
         this.users = users;
         this.name = name;
         this.admin = admin;
+        this.market = new ArrayList<>();
     }
 
     public List<User> getUsers() {
@@ -61,6 +66,14 @@ public class Community implements Serializable{
 
     public void addUser(User user){
         this.users.add(user);
+    }
+
+    public List<Player> getMarket() {
+        return market;
+    }
+
+    public void setMarket(List<Player> market) {
+        this.market = market;
     }
 
     @Override
