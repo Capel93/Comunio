@@ -1,4 +1,4 @@
-package cat.udl.eps.softarch.hello.service;
+package cat.udl.eps.softarch.hello.xQuery;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,11 +24,16 @@ public class XQueryHelper {
     private JAXBContext          jaxbContext;
     private Unmarshaller         jaxbUnmarshaller;
 
-    static final String apiUrlTeams ="http://www.resultados-futbol.com/scripts/api/api.php?tz=Europe/Madrid&format=xml&req=teams&key=0bbe700a8b3bcf94832e2cd9556b8c5e&league=1";
-    static final String apiTeamBase = "http://www.resultados-futbol.com/scripts/api/api.php?tz=Europe/Madrid&format=xml&req=team_players&key=0bbe700a8b3bcf94832e2cd9556b8c5e&team=";
-    static final String apiUrlMatchActual = "http://www.resultados-futbol.com/scripts/api/api.php?tz=Europe/Madrid&format=xml&req=matchs&key=0bbe700a8b3bcf94832e2cd9556b8c5e&league=1&order=twin";
+    public static final String[] teamsId = {"69591", "69592", "69590", "69594", "69597","69593", "69596","69600","69894","69599","69598", "69705","69706","69601","69602","69603", "69604","69605","69606","69595" };
+    public static final String[] teamsName = {"FCB", "69592", "69590", "69594", "69597","69593", "69596","69600","69894","69599","69598", "69705","69706","69601","69602","69603", "69604","69605","69606","69595" };
 
-    static final String teamsXQ =
+    public HashMap<String,String> teamHashMap;
+
+    public static final String apiUrlTeams ="http://www.resultados-futbol.com/scripts/api/api.php?tz=Europe/Madrid&format=xml&req=teams&key=0bbe700a8b3bcf94832e2cd9556b8c5e&league=1";
+    public static final String apiTeamBase = "http://www.resultados-futbol.com/scripts/api/api.php?tz=Europe/Madrid&format=xml&req=team_players&key=0bbe700a8b3bcf94832e2cd9556b8c5e&team=";
+    public static final String apiUrlMatchActual = "http://www.resultados-futbol.com/scripts/api/api.php?tz=Europe/Madrid&format=xml&req=matchs&key=0bbe700a8b3bcf94832e2cd9556b8c5e&league=1&order=twin";
+
+    public static final String teamsXQ =
             //declare variable $doc := doc(\"http://www.resultados-futbol.com/scripts/api/api.php?tz=Europe/Madrid&format=xml&req=get_teams&key=0bbe700a8b3bcf94832e2cd9556b8c5e&filter=espana\");\n"
             "declare variable $doc external;\n"
                     + "for $t in $doc/teams/team\n"
@@ -37,7 +43,7 @@ public class XQueryHelper {
                     +   "<nameShow>{$t/nameShow/text()}</nameShow>"
                     +   "</team>";
 
-    static final String playerXQ =
+    public static final String playerXQ =
             "declare variable $doc external;\n"
                     +"for $t in $doc/team_players/player\n" +
                     "return <player>\n" +
@@ -111,7 +117,7 @@ public class XQueryHelper {
     }
 
     @XmlRootElement
-    private static class Player {
+    public static class Player {
         @XmlElement String id;
         @XmlElement String nick;
         @XmlElement String role;
@@ -134,11 +140,21 @@ public class XQueryHelper {
             this.role = this.role.replaceAll("\n","");
             this.teamId = this.teamId.replaceAll("\n","");
         }
+
+        public String getNick() {
+            return nick;
+        }
+
+        public String getRole() {
+            return role;
+        }
+
+
     }
 
 
 
-    XQueryHelper(String xquery, URL url)
+    public XQueryHelper(String xquery, URL url)
             throws ClassNotFoundException, InstantiationException, IllegalAccessException, XQException, IOException, JAXBException {
         URLConnection urlconn = url.openConnection();
         urlconn.setReadTimeout(50000);
@@ -181,7 +197,7 @@ public class XQueryHelper {
     }
 
 
-    ArrayList<Player> getPlayers(String teamId) throws JAXBException {
+    public ArrayList<Player> getPlayers(String teamId) throws JAXBException {
         this.jaxbContext = JAXBContext.newInstance(Player.class);
         this.jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         ArrayList<Player> players = new ArrayList<Player>();
@@ -240,7 +256,7 @@ public class XQueryHelper {
 
 
         String jornada = "&round=";
-        String[] teamsId = {"69591", "69592", "69590", "69594", "69597","69593", "69596","69600","69894","69599","69598", "69705","69706","69601","69602","69603", "69604","69605","69606","69595" };
+       // String[] teamsId = {"69591", "69592", "69590", "69594", "69597","69593", "69596","69600","69894","69599","69598", "69705","69706","69601","69602","69603", "69604","69605","69606","69595" };
         //String teamsId = {""};
         ArrayList<Player> players = new ArrayList<Player>();
         try {

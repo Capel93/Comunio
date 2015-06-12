@@ -35,6 +35,8 @@ public class User implements UserDetails {
 
     private int points;
 
+
+
     public int getPoints() {
         return points;
     }

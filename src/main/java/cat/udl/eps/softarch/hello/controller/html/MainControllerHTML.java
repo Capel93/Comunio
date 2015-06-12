@@ -17,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.xml.bind.JAXBException;
+import javax.xml.xquery.XQException;
+import java.io.IOException;
 
 /**
  * Created by joanmarc on 10/06/15.
@@ -78,7 +81,7 @@ public class MainControllerHTML {
 
     // CREATE
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded", produces="text/html")
-    public String registerHTML(@Valid @ModelAttribute("user") User user, BindingResult binding, HttpServletResponse response) {
+    public String registerHTML(@Valid @ModelAttribute("user") User user, BindingResult binding, HttpServletResponse response) throws IllegalAccessException, XQException, IOException, JAXBException, InstantiationException, ClassNotFoundException {
 
         logger.info("User username:{}, email:{}, team:{}",user.getUsername(),user.getEmail(),user.getTeamSquad());
         //mainController.create(user,response).

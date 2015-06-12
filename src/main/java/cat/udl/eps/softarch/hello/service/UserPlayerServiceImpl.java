@@ -3,8 +3,16 @@ package cat.udl.eps.softarch.hello.service;
 import cat.udl.eps.softarch.hello.model.Player;
 import cat.udl.eps.softarch.hello.model.User;
 import cat.udl.eps.softarch.hello.repository.UserRepository;
+import cat.udl.eps.softarch.hello.xQuery.XQueryHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.xquery.XQException;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by joanmarc on 20/05/15.
@@ -44,4 +52,64 @@ public class UserPlayerServiceImpl implements UserPlayerService{
         //TeamSquad teamSquad = teamSquadRepository.findTeamSquadByUserName(username);
         //teamSquad.removePlayer(playerName);
     }
+
+    @Override
+    public List<Player> getPlayers() {
+
+        //map id-nom
+        ArrayList<Player> players = new ArrayList<>();
+
+        for (int i = 0; i <XQueryHelper.teamsId.length ; i++) {
+
+            String team = XQueryHelper.apiTeamBase+XQueryHelper.teamsId[i];
+            ArrayList<XQueryHelper.Player> jugadors = new ArrayList<XQueryHelper.Player>();
+            XQueryHelper xQueryHelperPlayers = null;
+            try {
+                xQueryHelperPlayers = new XQueryHelper(XQueryHelper.playerXQ, new URL(team));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (XQException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+            try {
+                jugadors.addAll(xQueryHelperPlayers.getPlayers(XQueryHelper.teamsId[i]));
+
+                Player p;
+                for (XQueryHelper.Player player:jugadors ){
+                    p = new Player();
+                    p.setNick(player.getNick());
+                    p.setRole(player.getRole());
+                    p.setTeam(XQueryHelper.teamsName[i]);
+                    p.setCurrentPoints(3);
+                    p.setTotalPoints(54);
+                    p.setPrice(5000000);
+                    players.add(p);
+
+                }
+
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+
+
+        System.out.println(players);
+
+        return players;
+
+
+
+    }
+
 }

@@ -2,12 +2,18 @@ package cat.udl.eps.softarch.hello.service;
 
 import cat.udl.eps.softarch.hello.model.*;
 import cat.udl.eps.softarch.hello.repository.*;
+import cat.udl.eps.softarch.hello.xQuery.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.xquery.XQException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,34 +53,10 @@ public class UserServiceImpl implements UserService{
         teamSquad.setName(user.getTeamSquad());
         teamSquad.setManager(user.getUsername());
 
-        logger.info("teamSquad not save");
 
-        //List<Player> titularPlayers = new ArrayList<>();
-        //Team t1 = new Team("FCB");
-        //teamRepository.save(t1);
-        //Player p1 = new Player("Joan","DC",user.getTeamSquad(),t1);
-        //playerRepository.save(p1);
-        //Team t2 = new Team("AND");
-        //teamRepository.save(t2);
-        //Player p2 = new Player("Victor","DF",user.getTeamSquad(),t2);
-        //playerRepository.save(p2);
-        //titularPlayers.add();
-        //titularPlayers.add(p2);
-        //teamSquad.setTitularPlayers(titularPlayers);
 
-        logger.info("titular players save");
 
-        //List<Player> suplentPlayers = new ArrayList<>();
-        //Team t3 = new Team("UEL");
-        //teamRepository.save(t3);
-        //Player p3 = new Player("Guille","LD",user.getTeamSquad(),t3);
-        //playerRepository.save(p3);
-        //Player p4 = new Player("Sergi","LI",user.getTeamSquad(),t3);
-        //playerRepository.save(p4);
-        //suplentPlayers.add(p3);
-        //suplentPlayers.add(p4);
-        //teamSquad.setSuplentPlayers(suplentPlayers);
-        //logger.info("suplent players save");
+            //players = xQueryHelperPlayers.getPlayers();
 
         TeamSquad savedTeam = teamSquadRepository.save(teamSquad);
         logger.info("teamSquad save");
@@ -86,19 +68,7 @@ public class UserServiceImpl implements UserService{
         //teamSquadPlayerService.addSuplentPlayer(savedTeam.getName(), playerRepository.findOne("Sergi"));
         logger.info("players added save");
 
-
-
-        //Community community;
-        //if(communityRepository.findOne(user.getCommunity())==null){
-            /*community = new Community();
-            community.setName(user.getCommunity());
-            community.setAdmin(user);
-            community.addUser(user);
-            communityRepository.save(community);*/
-        //}else{
-        //    community = communityRepository.findOne(user.getCommunity());
-        //}
-
+        user.setMoney(10000000); //10.000.000
         User u = userRepository.save(user);
         return u;
 

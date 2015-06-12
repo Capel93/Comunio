@@ -16,14 +16,7 @@
 </head>
 <body>
     <p><a href="/api/teamSquads">TeamSquad</a></p>
-    <c:if test="${not empty teamSquad}">
-        <h2>TeamSquad name ${teamSquad.getName()}</h2>
-        <p>Message:
-            (<a href="/api/teamSquads/${teamSquad.getId()}/">edit</a>)</p>
-        <p>By ${teamSquad.getManager().getUserName()} </p>
 
-
-    </c:if>
     <h2>Users List</h2>
     <link rel="stylesheet" href="/css/application.css">
 
@@ -39,10 +32,10 @@
 
         <div id="menubar">
             <ul id="menu">
-                <li class="current"><a href="mainPage">Home</a></li>
+                <li ><a href="mainPage">Home</a></li>
                 <li><a href="users">Ranking</a></li>
                 <li><a href="teamSquads">currentRunking</a></li>
-                <li><a href="teamSquad/${user.username}">teamSquad</a></li>
+                <li class="current"><a href="teamSquads/${user.username}">teamSquad</a></li>
                 <li><a href="market/${user.username}">Market</a></li>
             </ul>
         </div><!--close menubar-->

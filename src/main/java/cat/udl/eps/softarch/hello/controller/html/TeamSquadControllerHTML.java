@@ -94,4 +94,11 @@ public class TeamSquadControllerHTML {
     }
 
 
+    // RETRIEVE
+    @RequestMapping(value = "/players", method = RequestMethod.POST, produces = "text/html")
+    public ModelAndView retrievePlayersHTML(@PathVariable( "name" ) String name) {
+        return new ModelAndView("teamSquad", "teamSquad", teamSquadController.retrieve(name));
+    }
+
+
 }

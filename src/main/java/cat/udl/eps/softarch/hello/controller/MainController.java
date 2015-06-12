@@ -17,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.xml.bind.JAXBException;
+import javax.xml.xquery.XQException;
+import java.io.IOException;
 
 /**
  * Created by joanmarc on 10/06/15.
@@ -58,7 +61,7 @@ public class MainController {
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public User create(@Valid @RequestBody User user, HttpServletResponse response) {
+    public User create(@Valid @RequestBody User user, HttpServletResponse response) throws IllegalAccessException, XQException, IOException, JAXBException, InstantiationException, ClassNotFoundException {
         logger.info("User username:{}, email:{}, team:{}",user.getUsername(),user.getEmail(),user.getTeamSquad());
         //teamSquad.setManager(new User("vic","vv@vv.es"));
         User newUser = userService.addUser(user);

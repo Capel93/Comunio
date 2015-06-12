@@ -3,7 +3,6 @@ package cat.udl.eps.softarch.hello.controller;
 import cat.udl.eps.softarch.hello.model.User;
 import cat.udl.eps.softarch.hello.repository.UserRepository;
 import cat.udl.eps.softarch.hello.service.UserService;
-import cat.udl.eps.softarch.hello.service.XQueryHelper;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBException;
+import javax.xml.xquery.XQException;
+import java.io.IOException;
 
 /**
  * Created by http://rhizomik.net/~roberto/
@@ -56,7 +58,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public User create(@RequestBody User user, HttpServletResponse response) {
+    public User create(@RequestBody User user, HttpServletResponse response) throws IllegalAccessException, XQException, IOException, JAXBException, InstantiationException, ClassNotFoundException {
         User u = userService.addUser(user);
 
 

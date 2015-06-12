@@ -22,11 +22,11 @@
 
     <div id="menubar">
         <ul id="menu">
-            <li><a href="mainPage">Home</a></li>
+            <li><a href="/mainPage">Home</a></li>
             <li class="current"><a href="/users">Ranking</a></li>
             <li><a href="/teamSquads">currentRunking</a></li>
-            <li><a href="teamSquad/${user.username}">teamSquad</a></li>
-            <li><a href="market/${user.username}">Market</a></li>
+            <li><a href="/teamSquad/${user.username}">teamSquad</a></li>
+            <li><a href="/market/${user.username}">Market</a></li>
         </ul>
     </div><!--close menubar-->
 

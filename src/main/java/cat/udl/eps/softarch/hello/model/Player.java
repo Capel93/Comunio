@@ -25,9 +25,12 @@ public class Player implements Serializable{
 
     private int currentPoints;
 
+    private int price;
+
     public Player() {
         this.totalPoints = 0;
         this.currentPoints = 0;
+        this.price = 0;
     }
 
     public Player(String nick, String role, String teamSquad, String team) {
@@ -37,6 +40,14 @@ public class Player implements Serializable{
         this.team = team;
         this.totalPoints = 0;
         this.currentPoints = 0;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getNick() {

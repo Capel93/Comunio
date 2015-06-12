@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBException;
+import javax.xml.xquery.XQException;
+import java.io.IOException;
 
 /**
  * Created by http://rhizomik.net/~roberto/
@@ -66,7 +69,7 @@ public class UserControllerHTML {
 
     // CREATE
     @RequestMapping(method = RequestMethod.POST, consumes = "application/x-www-form-urlencoded", produces="text/html")
-    public String createHTML(@ModelAttribute("user") User user, BindingResult binding, HttpServletResponse response) {
+    public String createHTML(@ModelAttribute("user") User user, BindingResult binding, HttpServletResponse response) throws IllegalAccessException, XQException, IOException, JAXBException, InstantiationException, ClassNotFoundException {
 
         logger.info("User username:{}, email:{}, community:{}, team:{} ",user.getUsername(),user.getEmail(),user.getCommunity(),user.getTeamSquad());
         return "redirect:users/"+userController.create(user, response).getUsername();
